@@ -20,28 +20,47 @@ namespace PB.Clientes.Api.Controllers
         [ProducesResponseType<CriarNovoCliente.Response>(StatusCodes.Status500InternalServerError, "application/json")]
         public async Task<IActionResult> CriarCliente(CriarNovoCliente.Request request, CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BuildResultWithInvalidModelState(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BuildResultWithInvalidModelState(ModelState);
+                }
+
+                var command = request.ToCommand();
+                var result = await _mediator.Send(command, cancellationToken);
+
+                var apiResponse = new CriarNovoCliente.Response();
+                if (result.IsSuccess)
+                {
+                    await _uow.CommitTransactionAsync(cancellationToken);
+                    return Created(string.Empty, apiResponse);
+                }
+
+                apiResponse.Errors.AddRange(result.Errors.Select(e => new ErrorBase
+                {
+                    Key = e.Key,
+                    Message = e.Message,
+                }));
+
+                return BadRequest(apiResponse);
             }
-
-            var command = request.ToCommand();
-            var result = await _mediator.Send(command, cancellationToken);
-
-            var apiResponse = new CriarNovoCliente.Response();
-            if (result.IsSuccess)
+            catch (Exception)
             {
-                await _uow.CommitTransactionAsync(cancellationToken);
-                return Created(string.Empty, apiResponse);
+                return BuildInternalServerError();
             }
+        }
 
-            apiResponse.Errors.AddRange(result.Errors.Select(e => new ErrorBase
+        private static ObjectResult BuildInternalServerError()
+        {
+            var response = new CriarNovoCliente.Response();
+            response.Errors.Add(new ErrorBase()
             {
-                Key = e.Key,
-                Message = e.Message,
-            }));
+                Key = "CLI-ER-500",
+                Message = "Ocorreu um erro inesperado no servidor. Tente novamente mais tarde."
+            });
 
-            return BadRequest(apiResponse);
+            return new ObjectResult(response);
         }
 
         private static BadRequestObjectResult BuildResultWithInvalidModelState(ModelStateDictionary modelState)

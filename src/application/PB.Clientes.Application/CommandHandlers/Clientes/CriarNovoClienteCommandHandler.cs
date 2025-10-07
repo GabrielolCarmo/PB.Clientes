@@ -15,7 +15,7 @@ namespace PB.Clientes.Application.CommandHandlers.Clientes
         public async Task<IServiceOperationResult> Handle(CriarNovoClienteCommand command, CancellationToken cancellationToken)
         {
             var result = new ServiceOperationResult();
-            if (await _repository.ValidaSeEmailEstaCadastradoAsync(command.Email, cancellationToken))
+            if (await _repository.EmailJaEstaCadastradoAsync(command.Email, cancellationToken))
             {
                 return result.AddError(new NotificationError("CLI-ER-001", "O email já está cadastrado no sistema."));
             }

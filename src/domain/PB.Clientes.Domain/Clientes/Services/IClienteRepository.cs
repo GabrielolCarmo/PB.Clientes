@@ -2,7 +2,7 @@
 {
     public interface IClienteRepository
     {
-        public Task<bool> ValidaSeEmailEstaCadastradoAsync(string email, CancellationToken cancellationToken);
+        public Task<bool> EmailJaEstaCadastradoAsync(string email, CancellationToken cancellationToken);
 
         public Task PersistirClienteAsync(Cliente cliente, CancellationToken cancellationToken);
     }

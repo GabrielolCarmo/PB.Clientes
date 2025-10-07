@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PB.Clientes.ApiModels.Clientes;
 using PB.Clientes.ApiModels.Clientes.Common;
+using PB.Clientes.Infra.Kernel.Data;
 
 namespace PB.Clientes.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/clientes")]
     [ApiController]
-    public class ClientesController(IMediator mediator) : ControllerBase
+    public class ClientesController(IMediator mediator, IUnityOfWork uow) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;
+        private readonly IUnityOfWork _uow = uow;
 
         [HttpPost]
         [ProducesResponseType<CriarNovoCliente.Response>(StatusCodes.Status201Created, "application/json")]
@@ -29,7 +31,8 @@ namespace PB.Clientes.Api.Controllers
             var apiResponse = new CriarNovoCliente.Response();
             if (result.IsSuccess)
             {
-                return Ok(apiResponse);
+                await _uow.CommitTransactionAsync(cancellationToken);
+                return Created(string.Empty, apiResponse);
             }
 
             apiResponse.Errors.AddRange(result.Errors.Select(e => new ErrorBase

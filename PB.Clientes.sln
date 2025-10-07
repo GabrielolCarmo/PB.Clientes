@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PB.Clientes.Infra.Data", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PB.Clientes.Infra.Kernel", "src\infra\PB.Clientes.Infra.Kernel\PB.Clientes.Infra.Kernel.csproj", "{F1ED9259-8111-4970-9613-24CE1C8487D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PB.Clientes.UnitTests", "test\PB.Clientes.UnitTests\PB.Clientes.UnitTests.csproj", "{61537A9C-77B0-4E35-98F6-C256A0B2BDAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PB.Clientes.UnityTests", "test\PB.Clientes.UnitTests\PB.Clientes.UnityTests.csproj", "{61537A9C-77B0-4E35-98F6-C256A0B2BDAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AA49789-FC12-4073-9599-35E9858311DA}"
 	ProjectSection(SolutionItems) = preProject

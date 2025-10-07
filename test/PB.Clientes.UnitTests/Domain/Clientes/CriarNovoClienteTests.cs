@@ -4,7 +4,7 @@ using PB.Clientes.Domain.Clientes;
 using PB.Clientes.Domain.Clientes.Commands;
 using PB.Clientes.Domain.Clientes.Events;
 
-namespace PB.Clientes.UnitTests.Domain.Clientes
+namespace PB.Clientes.UnityTests.Domain.Clientes
 {
     public class CriarNovoClienteTests
     {

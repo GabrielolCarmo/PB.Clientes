@@ -7,7 +7,7 @@ using PB.Clientes.Domain.Clientes;
 using PB.Clientes.Domain.Clientes.Commands;
 using PB.Clientes.Domain.Clientes.Services;
 
-namespace PB.Clientes.UnitTests.Application.Clientes
+namespace PB.Clientes.UnityTests.Application.Clientes
 {
     public class CriarNovoClienteCommandHandlerTests
     {
@@ -36,7 +36,7 @@ namespace PB.Clientes.UnitTests.Application.Clientes
             };
 
             _clienteRepositoryMock
-                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .Setup(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
             // Act
@@ -62,14 +62,14 @@ namespace PB.Clientes.UnitTests.Application.Clientes
             };
 
             _clienteRepositoryMock
-                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .Setup(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             // Act
             _ = await _handler.Handle(command, CancellationToken.None);
 
             // Assert
-            _clienteRepositoryMock.Verify(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()), Times.Once, "O método de validação de email deve ser chamado exatamente uma vez.");
+            _clienteRepositoryMock.Verify(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()), Times.Once, "O método de validação de email deve ser chamado exatamente uma vez.");
         }
 
         [Fact(DisplayName = "Dado um comando válido, deve criar um novo cliente com sucesso")]
@@ -84,7 +84,7 @@ namespace PB.Clientes.UnitTests.Application.Clientes
             };
 
             _clienteRepositoryMock
-                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .Setup(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             // Act
@@ -109,7 +109,7 @@ namespace PB.Clientes.UnitTests.Application.Clientes
             };
 
             _clienteRepositoryMock
-                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .Setup(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             // Act
@@ -131,7 +131,7 @@ namespace PB.Clientes.UnitTests.Application.Clientes
             };
 
             _clienteRepositoryMock
-                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .Setup(r => r.EmailJaEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             // Act

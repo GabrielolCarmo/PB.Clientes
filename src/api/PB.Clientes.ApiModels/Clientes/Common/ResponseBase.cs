@@ -2,9 +2,9 @@
 {
     public class ResponseBase
     {
-        public readonly List<ErrorBase> Errors = [];
+        public List<ErrorBase> Errors { get; } = [];
 
-        public bool IsSuccess => Errors == null || Errors.Count > 0;
+        public bool Success => Errors == null || Errors.Count <= 0;
     }
 
     public class ErrorBase

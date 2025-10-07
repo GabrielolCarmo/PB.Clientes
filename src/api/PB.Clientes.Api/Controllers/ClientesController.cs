@@ -14,6 +14,12 @@ namespace PB.Clientes.Api.Controllers
         private readonly IMediator _mediator = mediator;
         private readonly IUnityOfWork _uow = uow;
 
+        /// <summary>
+        /// Cria um novo cliente no sistema.
+        /// </summary>
+        /// <param name="request">Dados para criação do cliente.</param>
+        /// <param name="cancellationToken">Token de cancelamento da requisição.</param>
+        /// <returns>Retorna o resultado da operação de criação do cliente, no padrão do CriarNovoCliente.Response.</returns>
         [HttpPost]
         [ProducesResponseType<CriarNovoCliente.Response>(StatusCodes.Status201Created, "application/json")]
         [ProducesResponseType<CriarNovoCliente.Response>(StatusCodes.Status400BadRequest, "application/json")]
@@ -51,6 +57,9 @@ namespace PB.Clientes.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna resposta de erro interno do servidor no padrão do ResponseBase.
+        /// </summary>
         private static ObjectResult BuildInternalServerError()
         {
             var response = new CriarNovoCliente.Response();
@@ -63,6 +72,10 @@ namespace PB.Clientes.Api.Controllers
             return new ObjectResult(response);
         }
 
+        /// <summary>
+        /// Retorna resposta de erro de validação do ModelState no padrão do ResponseBase.
+        /// </summary>
+        /// <param name="modelState">ModelState inválido.</param>
         private static BadRequestObjectResult BuildResultWithInvalidModelState(ModelStateDictionary modelState)
         {
             var result = Activator.CreateInstance<ResponseBase>();

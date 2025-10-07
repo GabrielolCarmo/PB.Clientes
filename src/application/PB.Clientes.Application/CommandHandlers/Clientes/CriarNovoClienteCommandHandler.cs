@@ -7,11 +7,20 @@ using PB.Commons.Infra.Kernel.Domain;
 
 namespace PB.Clientes.Application.CommandHandlers.Clientes
 {
+    /// <summary>
+    /// Handler do comando para criar um novo cliente, realiza a orquestração entre os serviços de domínio.
+    /// </summary>
     public class CriarNovoClienteCommandHandler(IClienteRepository repository, IMediator mediator) : IRequestHandler<CriarNovoClienteCommand, IServiceOperationResult>
     {
         private readonly IClienteRepository _repository = repository;
         private readonly IMediator _mediator = mediator;
 
+        /// <summary>
+        /// Orquestra o processo de criação de um novo cliente.
+        /// </summary>
+        /// <param name="command">Comando de criação de cliente.</param>
+        /// <param name="cancellationToken">Token de cancelamento.</param>
+        /// <returns>Resultado da operação de serviço.</returns>
         public async Task<IServiceOperationResult> Handle(CriarNovoClienteCommand command, CancellationToken cancellationToken)
         {
             var result = new ServiceOperationResult();

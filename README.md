@@ -181,7 +181,7 @@ public async Task<bool> EmailJaEstaCadastradoAsync(string email, CancellationTok
    No diretório raiz, execute:
 
    ```sh
-   dotnet test test/PB.Clientes.UnityTests/PB.Clientes.UnityTests.csproj
+   dotnet test test/PB.Clientes.UnitTests/PB.Clientes.UnityTests.csproj
    ```
 
 ## Testes

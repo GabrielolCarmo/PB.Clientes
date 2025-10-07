@@ -1,6 +1,9 @@
-﻿namespace PB.Clientes.Domain.Clientes.Commands
+﻿using MediatR;
+using PB.Clientes.Infra.Kernel.Application;
+
+namespace PB.Clientes.Domain.Clientes.Commands
 {
-    public class CriarNovoClienteCommand
+    public class CriarNovoClienteCommand : IRequest<IServiceOperationResult>
     {
         public required string Nome { get; set; }
 

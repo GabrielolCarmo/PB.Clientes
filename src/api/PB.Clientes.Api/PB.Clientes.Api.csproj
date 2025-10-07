@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\application\PB.Clientes.Application\PB.Clientes.Application.csproj" />
+    <ProjectReference Include="..\..\domain\PB.Clientes.Domain\PB.Clientes.Domain.csproj" />
+    <ProjectReference Include="..\..\infra\PB.Clientes.Infra.Data\PB.Clientes.Infra.Data.csproj" />
+    <ProjectReference Include="..\PB.Clientes.ApiModels\PB.Clientes.ApiModels.csproj" />
   </ItemGroup>
 
 </Project>

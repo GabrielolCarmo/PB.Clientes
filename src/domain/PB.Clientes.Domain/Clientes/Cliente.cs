@@ -12,7 +12,7 @@ namespace PB.Clientes.Domain.Clientes
             Email = email;
             Score = score;
 
-            PublishEvent(new NovoClienteCriadoEvent());
+            PublishEvent(new NovoClienteCriadoEvent(this));
         }
 
         public string Nome { get; private set; }

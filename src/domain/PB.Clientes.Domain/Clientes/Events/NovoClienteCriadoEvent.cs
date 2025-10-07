@@ -2,10 +2,16 @@
 
 namespace PB.Clientes.Domain.Clientes.Events
 {
-    public class NovoClienteCriadoEvent : IDomainEvent
+    public class NovoClienteCriadoEvent(Cliente cliente) : IDomainEvent
     {
-        public Guid AggregateRootId => throw new NotImplementedException();
+        public Guid AggregateRootId { get; } = cliente.Id;
 
         public string EventType => "NOVO_CLIENTE_CRIADO";
+
+        public string Nome { get; } = cliente.Nome;
+
+        public string Email { get; } = cliente.Email;
+
+        public int Score { get; } = cliente.Score;
     }
 }

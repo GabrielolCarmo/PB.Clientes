@@ -23,7 +23,7 @@ namespace PB.Clientes.Application.CommandHandlers.Clientes
             var cliente = Cliente.Factory.CriarNovoCliente(command);
 
             await _repository.PersistirClienteAsync(cliente, cancellationToken);
-            return result.PublishEvents(cliente, _mediator);
+            return await result.PublishEvents(cliente, _mediator, cancellationToken);
         }
     }
 }

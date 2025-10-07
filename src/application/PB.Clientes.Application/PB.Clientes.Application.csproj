@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.5.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\domain\PB.Clientes.Domain\PB.Clientes.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="PB.Commons.Api">
+      <HintPath>..\..\..\dependencies\PB.Commons.Api.dll</HintPath>
+    </Reference>
     <Reference Include="PB.Commons.Infra.Kernel">
       <HintPath>..\..\..\dependencies\PB.Commons.Infra.Kernel.dll</HintPath>
     </Reference>

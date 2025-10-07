@@ -18,4 +18,13 @@
     <ProjectReference Include="..\PB.Clientes.ApiModels\PB.Clientes.ApiModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="PB.Commons.Api">
+      <HintPath>..\..\..\dependencies\PB.Commons.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="PB.Commons.Infra.Kernel">
+      <HintPath>..\..\..\dependencies\PB.Commons.Infra.Kernel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

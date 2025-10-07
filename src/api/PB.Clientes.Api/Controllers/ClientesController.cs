@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PB.Clientes.ApiModels.Clientes;
-using PB.Clientes.ApiModels.Clientes.Common;
-using PB.Clientes.Infra.Kernel.Data;
+using PB.Commons.Api;
+using PB.Commons.Infra.Kernel.Data;
 
 namespace PB.Clientes.Api.Controllers
 {

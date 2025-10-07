@@ -1,4 +1,4 @@
-﻿using PB.Clientes.Infra.Kernel.Domain;
+﻿using PB.Commons.Infra.Kernel.Domain;
 
 namespace PB.Clientes.Domain.Clientes.Events
 {

@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\infra\PB.Clientes.Infra.Kernel\PB.Clientes.Infra.Kernel.csproj" />
+    <Reference Include="PB.Commons.Infra.Kernel">
+      <HintPath>..\..\..\dependencies\PB.Commons.Infra.Kernel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

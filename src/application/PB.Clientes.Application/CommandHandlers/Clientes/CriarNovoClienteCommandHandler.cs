@@ -2,8 +2,8 @@
 using PB.Clientes.Domain.Clientes;
 using PB.Clientes.Domain.Clientes.Commands;
 using PB.Clientes.Domain.Clientes.Services;
-using PB.Clientes.Infra.Kernel.Application;
-using PB.Clientes.Infra.Kernel.Domain;
+using PB.Commons.Infra.Kernel.Application;
+using PB.Commons.Infra.Kernel.Domain;
 
 namespace PB.Clientes.Application.CommandHandlers.Clientes
 {

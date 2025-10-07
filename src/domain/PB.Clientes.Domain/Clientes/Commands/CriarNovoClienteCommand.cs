@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PB.Clientes.Infra.Kernel.Application;
+using PB.Commons.Infra.Kernel.Application;
 
 namespace PB.Clientes.Domain.Clientes.Commands
 {

@@ -1,5 +1,5 @@
-﻿using PB.Clientes.ApiModels.Clientes.Common;
-using PB.Clientes.Domain.Clientes.Commands;
+﻿using PB.Clientes.Domain.Clientes.Commands;
+using PB.Commons.Api;
 using System.ComponentModel.DataAnnotations;
 
 namespace PB.Clientes.ApiModels.Clientes

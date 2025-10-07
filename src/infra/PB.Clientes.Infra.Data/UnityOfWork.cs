@@ -1,5 +1,5 @@
 ﻿using PB.Clientes.Infra.Data.Context;
-using PB.Clientes.Infra.Kernel.Data;
+using PB.Commons.Infra.Kernel.Data;
 
 namespace PB.Clientes.Infra.Data
 {

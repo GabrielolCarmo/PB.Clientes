@@ -1,4 +1,5 @@
-﻿using PB.Clientes.Domain.Clientes;
+﻿using MediatR;
+using PB.Clientes.Domain.Clientes;
 using PB.Clientes.Domain.Clientes.Commands;
 using PB.Clientes.Domain.Clientes.Services;
 using PB.Clientes.Infra.Kernel.Application;
@@ -6,9 +7,10 @@ using PB.Clientes.Infra.Kernel.Domain;
 
 namespace PB.Clientes.Application.CommandHandlers.Clientes
 {
-    public class CriarNovoClienteCommandHandler(IClienteRepository repository)
+    public class CriarNovoClienteCommandHandler(IClienteRepository repository, IMediator mediator) : IRequestHandler<CriarNovoClienteCommand, IServiceOperationResult>
     {
         private readonly IClienteRepository _repository = repository;
+        private readonly IMediator _mediator = mediator;
 
         public async Task<IServiceOperationResult> Handle(CriarNovoClienteCommand command, CancellationToken cancellationToken)
         {
@@ -21,7 +23,7 @@ namespace PB.Clientes.Application.CommandHandlers.Clientes
             var cliente = Cliente.Factory.CriarNovoCliente(command);
 
             await _repository.PersistirClienteAsync(cliente, cancellationToken);
-            return result.PublishEvents(cliente);
+            return result.PublishEvents(cliente, _mediator);
         }
     }
 }

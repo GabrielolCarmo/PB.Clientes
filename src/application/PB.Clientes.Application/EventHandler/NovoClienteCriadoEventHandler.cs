@@ -1,8 +1,9 @@
-﻿using PB.Clientes.Domain.Clientes.Events;
+﻿using MediatR;
+using PB.Clientes.Domain.Clientes.Events;
 
 namespace PB.Clientes.Application.EventHandler
 {
-    public class NovoClienteCriadoEventHandler
+    public class NovoClienteCriadoEventHandler : INotificationHandler<NovoClienteCriadoEvent>
     {
         public async Task Handle(NovoClienteCriadoEvent notification, CancellationToken cancellationToken)
         {

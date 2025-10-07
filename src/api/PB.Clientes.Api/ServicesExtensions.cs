@@ -2,7 +2,7 @@
 {
     public static class ServicesExtensions
     {
-        public static void AddApiServices(this IServiceCollection services, IConfiguration configuration)
+        public static void AddApiServices(this IServiceCollection services)
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Domain.ServicesExtensions).Assembly));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.ServicesExtensions).Assembly));

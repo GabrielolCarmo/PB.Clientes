@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using FluentAssertions;
+using MediatR;
 using Moq;
 using PB.Clientes.Application.CommandHandlers.Clientes;
 using PB.Clientes.Domain.Clientes;
@@ -12,10 +13,13 @@ namespace PB.Clientes.UnitTests.Application.Clientes
     {
         public CriarNovoClienteCommandHandlerTests()
         {
+            _mediator = new Mock<IMediator>();
+
             _clienteRepositoryMock = new Mock<IClienteRepository>();
-            _handler = new CriarNovoClienteCommandHandler(_clienteRepositoryMock.Object);
+            _handler = new CriarNovoClienteCommandHandler(_clienteRepositoryMock.Object, _mediator.Object);
         }
 
+        private readonly Mock<IMediator> _mediator;
         private readonly Mock<IClienteRepository> _clienteRepositoryMock;
         private readonly CriarNovoClienteCommandHandler _handler;
         private static readonly Faker Faker = new("pt_BR");
@@ -113,6 +117,28 @@ namespace PB.Clientes.UnitTests.Application.Clientes
 
             // Assert
             _clienteRepositoryMock.Verify(r => r.PersistirClienteAsync(It.IsAny<Cliente>(), It.IsAny<CancellationToken>()), Times.Once, "O método de adicionar cliente deve ser chamado exatamente uma vez.");
+        }
+
+        [Fact(DisplayName = "Dado um comando válido, deve publicar eventos do cliente criado")]
+        public async Task Dado_um_comando_valido_deve_publicar_eventos_do_cliente_criado()
+        {
+            // Arrange
+            var command = new CriarNovoClienteCommand()
+            {
+                Email = Faker.Person.Email,
+                Nome = Faker.Person.FullName,
+                Score = Faker.Random.Int(0, 1000)
+            };
+
+            _clienteRepositoryMock
+                .Setup(r => r.ValidaSeEmailEstaCadastradoAsync(command.Email, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            // Act
+            _ = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            _mediator.Verify(m => m.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()), Times.AtLeastOnce, "O método de publicação de eventos deve ser chamado pelo menos uma vez.");
         }
     }
 }

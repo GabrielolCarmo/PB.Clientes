@@ -1,4 +1,5 @@
-﻿using PB.Clientes.Infra.Kernel.Domain;
+﻿using MediatR;
+using PB.Clientes.Infra.Kernel.Domain;
 
 namespace PB.Clientes.Infra.Kernel.Application
 {
@@ -28,8 +29,18 @@ namespace PB.Clientes.Infra.Kernel.Application
             return this;
         }
 
-        public IServiceOperationResult PublishEvents(AggregateRoot aggregate)
+        public IServiceOperationResult PublishEvents(AggregateRoot aggregate, IMediator mediator)
         {
+            foreach (var @event in aggregate.Events)
+            {
+                if (@event is null)
+                {
+                    continue;
+                }
+
+                mediator.Publish(@event);
+            }
+
             return this;
         }
     }

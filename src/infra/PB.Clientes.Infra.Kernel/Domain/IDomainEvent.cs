@@ -1,6 +1,8 @@
-﻿namespace PB.Clientes.Infra.Kernel.Domain
+﻿using MediatR;
+
+namespace PB.Clientes.Infra.Kernel.Domain
 {
-    public interface IDomainEvent
+    public interface IDomainEvent : INotification
     {
         public Guid AggregateRootId { get; }
 
